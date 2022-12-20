@@ -16,7 +16,7 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //_shipController.SetInput(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+        _shipController.SetInput(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             _shipController.Shoot(false);

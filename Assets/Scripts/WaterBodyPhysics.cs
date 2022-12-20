@@ -22,6 +22,10 @@ public class WaterBodyPhysics : MonoBehaviour
     Vector3 _currentDamping;
     float _currentAngularDamping;
 
+    public Rigidbody RigidBody { get => _rb; }
+    public Buoy Buoy { get => _buoy; }
+    public bool IsOnWater { get => _isOnWater; }
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();

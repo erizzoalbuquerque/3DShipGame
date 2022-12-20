@@ -28,6 +28,11 @@ public class ShipController : MonoBehaviour
         _waterBody = GetComponent<WaterBodyPhysics>();
     }
 
+    private void Start()
+    {
+        _rb = _waterBody.RigidBody;
+    }
+
     void Update()
     {
     }
@@ -45,40 +50,35 @@ public class ShipController : MonoBehaviour
 
     void Move()
     {
-        ////Forward
-        //float forwardSpeed;
-        //float currentForwardSpeed = this.transform.InverseTransformDirection(_rb.velocity).z;
-        //
-        //float maxSpeedChange = _maxForwardAcceleration * Time.deltaTime;
-        //
-        //float incrementalForwardSpeed;
-        //if (Mathf.Abs(currentForwardSpeed) < _maxForwardSpeed)
-        //    incrementalForwardSpeed = maxSpeedChange * _forwardInput;
-        //else
-        //    incrementalForwardSpeed = 0;
-        //
-        //forwardSpeed = currentForwardSpeed + incrementalForwardSpeed -
-        //    currentForwardSpeed * _forwardDamping * Time.deltaTime;
-        //
-        //float sideSpeed;
-        //float currentSideSpeed = this.transform.InverseTransformDirection(_rb.velocity).x;
-        //
-        //sideSpeed = currentSideSpeed - currentSideSpeed * _sideDamping * Time.deltaTime;
-        //
-        //_rb.velocity = this.transform.TransformDirection(new Vector3(sideSpeed, 0f, forwardSpeed));
-        //
-        //
-        ////Steering
-        //float steeringSpeed;
-        //float currentSteeringSpeed = _rb.angularVelocity.y;
-        //_desiredSteeringSpeed = _steeringInput * _maxSteeringSpeed;
-        //
-        //float maxSteeringSpeedChange = _maxSteeringAcceleration * Time.deltaTime * Mathf.Clamp01(forwardSpeed / _maxForwardSpeed);
-        //
-        //steeringSpeed = Mathf.MoveTowards(currentSteeringSpeed, _desiredSteeringSpeed, maxSteeringSpeedChange) -
-        //    _angularDamping * currentSteeringSpeed * Time.deltaTime;
-        //
-        //_rb.angularVelocity = new Vector3(0f, steeringSpeed, 0f);
+        //Forward
+        float forwardSpeed;
+        Vector3 localVelocity = this.transform.InverseTransformDirection(_rb.velocity);
+        float currentForwardSpeed = localVelocity.z;
+        
+        float maxSpeedChange = _maxForwardAcceleration * Time.deltaTime;
+        
+        float incrementalForwardSpeed;
+        if (Mathf.Abs(currentForwardSpeed) < _maxForwardSpeed)
+            incrementalForwardSpeed = maxSpeedChange * _forwardInput;
+        else
+            incrementalForwardSpeed = 0;
+
+        forwardSpeed = currentForwardSpeed + incrementalForwardSpeed;        
+        
+        _rb.velocity = this.transform.TransformDirection(new Vector3(localVelocity.x,localVelocity.y, forwardSpeed));
+        
+        
+        //Steering
+        float steeringSpeed;
+        Vector3 localAngularVelocity = this.transform.InverseTransformDirection(_rb.angularVelocity);
+        float currentSteeringSpeed = localAngularVelocity.y;
+        _desiredSteeringSpeed = _steeringInput * _maxSteeringSpeed;
+        
+        float maxSteeringSpeedChange = _maxSteeringAcceleration * Time.deltaTime * Mathf.Clamp01(forwardSpeed / _maxForwardSpeed);
+
+        steeringSpeed = Mathf.MoveTowards(currentSteeringSpeed, _desiredSteeringSpeed, maxSteeringSpeedChange);
+        
+        _rb.angularVelocity = this.transform.TransformDirection(new Vector3(localAngularVelocity.x, steeringSpeed, localAngularVelocity.z));
     }
 
     public void Shoot(bool shootRight)

@@ -38,6 +38,12 @@ public class WaveManager : MonoBehaviour
         _buoys = new List<Buoy>(FindObjectsOfType<Buoy>() );
     }
 
+    private void Start()
+    {
+        UpdateWaveParameters(_waveAmplitude1, _waveFrequency1, _waveLength1, _wavePhase1,
+                              _waveAmplitude2, _waveFrequency2, _waveLength2, _wavePhase2);
+    }
+
     // Update is called once per frame
     void Update()
     {
