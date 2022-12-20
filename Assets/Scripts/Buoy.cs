@@ -9,12 +9,8 @@ public class Buoy : MonoBehaviour
     [SerializeField] float _buoyancy = 10f;
     [SerializeField] List<BuoyPart> buoyParts;
 
-    [SerializeField]
     float _waveAmplitude1, _waveFrequency1, _waveLength1, _wavePhase1;
-
-    [SerializeField]
     float _waveAmplitude2, _waveFrequency2, _waveLength2, _wavePhase2;
-
     Rigidbody _rb;
     float _submergence;
 
