@@ -18,10 +18,10 @@ public class PlayerInput : MonoBehaviour
     {
         _shipController.SetInput(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            _shipController.Shoot(false);
+        if (Input.GetKeyDown(KeyCode.Space))
+            _shipController.Jump();
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-            _shipController.Shoot(true);
+        if (Input.GetMouseButtonDown(0))
+            _shipController.Shoot();
     }
 }

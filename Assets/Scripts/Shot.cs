@@ -4,44 +4,32 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
-    [SerializeField] Vector3 _startVelocity = Vector3.forward;
-    [SerializeField] float _maxTravelDistance = 10f;
+    [SerializeField] float _lifeTime = 10f;
 
     Rigidbody _rb;
-    Vector3 _lastPostion;
-    float _currentTravelDistance;
-
-    public Vector3 StartVelocity { get => _startVelocity; set => _startVelocity = value; }
+    float _startTime;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        _currentTravelDistance = 0;
-        _lastPostion = this.transform.position;
-
         _rb = this.GetComponent<Rigidbody>();
-        _rb.velocity = _startVelocity;
+        _startTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        CalculateTravelDistance();
-
-        if (_currentTravelDistance >= _maxTravelDistance)
-            Destroy(this.gameObject);
-    }
-
-    void CalculateTravelDistance()
-    {
-        float delta = (this.transform.position - _lastPostion).magnitude;
-        _currentTravelDistance += delta;
-
-        _lastPostion = this.transform.position;
+        if (Time.time - _startTime > _lifeTime)
+            Explode();
     }
 
     void Explode()
     {
+        GameObject.Destroy(this.gameObject);
+    }
 
+    public void Setup(Vector3 startVelocity)
+    {
+        _rb.velocity = startVelocity;
     }
 }

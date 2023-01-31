@@ -5,15 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(WaterBodyPhysics))]
 public class ShipController : MonoBehaviour
 {
+    [SerializeField]  Cannon _cannon;
+
     [SerializeField] float _maxForwardSpeed = 5f;
     [SerializeField] float _maxForwardAcceleration = 5f;
 
     [SerializeField] float _maxSteeringSpeed = 2f;
     [SerializeField] float _maxSteeringAcceleration = 4f;
 
-    [SerializeField] GameObject _shotPrefab;
-    [SerializeField] float _shotDistanceOffset = 1f;
-    [SerializeField] float _shotStartSpeed = 5f;
+    [SerializeField] float _jumpVelocity = 2f;
 
     WaterBodyPhysics _waterBody;
     Rigidbody _rb;
@@ -81,19 +81,17 @@ public class ShipController : MonoBehaviour
         _rb.angularVelocity = this.transform.TransformDirection(new Vector3(localAngularVelocity.x, steeringSpeed, localAngularVelocity.z));
     }
 
-    public void Shoot(bool shootRight)
+    public void Shoot()
     {
-        //Vector3 shootDirection;
-        //if (shootRight)
-        //    shootDirection = Vector3.right;
-        //else
-        //    shootDirection = Vector3.left;
-        //
-        ////Dash
-        //_rb.velocity = _rb.velocity + this.transform.TransformDirection(-shootDirection) * 10f;
-        //
-        ////Shot
-        //GameObject shot = Instantiate(_shotPrefab, this.transform.position + _shotDistanceOffset * this.transform.TransformDirection(shootDirection), Quaternion.identity);
-        //shot.GetComponent<Shot>().StartVelocity = this.transform.TransformDirection(shootDirection) * _shotStartSpeed;
+        if (_cannon != null)
+        {
+            _cannon.Shoot(_rb.velocity);
+        }
+    }
+
+    public void Jump()
+    {
+        if (_waterBody.IsOnWater)
+            _rb.velocity += Vector3.up * _jumpVelocity;
     }
 }
