@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
+    [SerializeField] WaterBodyPhysics _waterBodyPhysics;
+    [SerializeField] float _gravityMultiplier = 1f;
     [SerializeField] float _lifeTime = 10f;
+    [SerializeField] GameObject _explosionPrefab = default;
 
     Rigidbody _rb;
     float _startTime;
@@ -21,10 +24,19 @@ public class Shot : MonoBehaviour
     {
         if (Time.time - _startTime > _lifeTime)
             Explode();
+
+        if (_waterBodyPhysics.IsOnWater)
+            Explode();
+    }
+
+    private void FixedUpdate()
+    {
+        _rb.AddForce(Physics.gravity * (_gravityMultiplier - 1f));
     }
 
     void Explode()
     {
+        Instantiate(_explosionPrefab, this.transform.position, Quaternion.identity);
         GameObject.Destroy(this.gameObject);
     }
 

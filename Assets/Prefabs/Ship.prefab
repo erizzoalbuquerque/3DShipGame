@@ -296,6 +296,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 199976259077137185}
     m_Modifications:
+    - target: {fileID: 1367693697190175974, guid: ab94426116d360d4f8ce589a7fdcf3cf,
+        type: 3}
+      propertyPath: _yawAxis
+      value: 
+      objectReference: {fileID: 5298128532533302265}
     - target: {fileID: 3819546482700753292, guid: ab94426116d360d4f8ce589a7fdcf3cf,
         type: 3}
       propertyPath: m_Name
@@ -401,3 +406,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d80d73d503efba44ae86971447165b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5298128532533302265 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7249761836044062570, guid: ab94426116d360d4f8ce589a7fdcf3cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3250165369588243603}
+  m_PrefabAsset: {fileID: 0}

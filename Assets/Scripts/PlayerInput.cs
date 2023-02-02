@@ -6,6 +6,8 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField]
     ShipController _shipController;
+    [SerializeField]
+    Cannon _cannon;
 
     // Start is called before the first frame update
     void Start()
@@ -23,5 +25,7 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
             _shipController.Shoot();
+
+        _cannon.Aim(Input.mousePosition);
     }
 }

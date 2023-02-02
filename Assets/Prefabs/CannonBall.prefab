@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7529058171930919667}
   - component: {fileID: 3713973277425742508}
   - component: {fileID: 4505106879426998703}
+  - component: {fileID: 7986704329982995246}
+  - component: {fileID: 2640348113995158483}
   - component: {fileID: 1260518377471989272}
   m_Layer: 0
   m_Name: CannonBall
@@ -64,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 21d488f91e81030489b1be2e30642382, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,6 +117,40 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7986704329982995246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419240909975221637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ea36d857ee56a4a90e6f6b3f438c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buoyancy: 10
+  buoyParts:
+  - _radius: 0.5
+    _offset: {x: 0, y: 0, z: 0}
+--- !u!114 &2640348113995158483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419240909975221637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dbfcaea90266c448d5333596d3cce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waterDamping: {x: 0, y: 0, z: 0}
+  _airDamping: {x: 0, y: 0, z: 0}
+  _waterAngularDamping: 0
+  _airAngularDamping: 0
+  _submergenceTreshold: 0.1
+  _isOnWater: 0
 --- !u!114 &1260518377471989272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,4 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28fbb8b82939c5a46b2a624026380c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifeTime: 10
+  _waterBodyPhysics: {fileID: 2640348113995158483}
+  _gravityMultiplier: 2
+  _lifeTime: 8
+  _explosionPrefab: {fileID: 4504277075419621480, guid: 34f5e4d4ba884ec40a0469ab5ed024db,
+    type: 3}
