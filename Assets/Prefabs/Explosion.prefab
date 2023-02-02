@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 5
-  _forceAtCenter: 10
+  _forceAtCenter: 1000
+  _upwardsModifier: 0
   _lifeTime: 5

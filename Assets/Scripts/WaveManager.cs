@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+public class WaveManager : Singleton<WaveManager>
 {
     [SerializeField] bool _noWaves = false;
 
@@ -20,9 +20,6 @@ public class WaveManager : MonoBehaviour
         _waveLength2 = 10f,
         _wavePhase2 = 0f;
 
-
-    List<Buoy> _buoys;
-
     float _currentWaveAmplitude1,
         _currentWaveFrequency1,
         _currentWaveLength1,
@@ -35,7 +32,7 @@ public class WaveManager : MonoBehaviour
 
     void Awake()
     {
-        _buoys = new List<Buoy>(FindObjectsOfType<Buoy>() );
+
     }
 
     private void Start()
@@ -67,18 +64,16 @@ public class WaveManager : MonoBehaviour
         _waterMaterial.SetFloat("_WaveFrequency2", waveFrequency2);
         _waterMaterial.SetFloat("_WaveLength2", waveLength2);
         _waterMaterial.SetFloat("_WavePhase2", wavePhase2);
+    }
 
-        foreach (Buoy buoy in _buoys)
-        {
-            buoy.WaveAmplitude1 = waveAmplitude1;
-            buoy.WaveFrequency1 = waveFrequency1;
-            buoy.WaveLength1 = waveLength1;
-            buoy.WavePhase1 = wavePhase1;
+    public float GetWaterHeightAtPoint(Vector3 position)
+    {
+        if (_noWaves)
+            return 0f;
 
-            buoy.WaveAmplitude2 = waveAmplitude2;
-            buoy.WaveFrequency2 = waveFrequency2;
-            buoy.WaveLength2 = waveLength2;
-            buoy.WavePhase2 = wavePhase2;
-        }
+        float waveHeight = _waveAmplitude1 * Mathf.Sin(2 * Mathf.PI * (_waveFrequency1 * Time.time + position.x / (2 * _waveLength1)) + _wavePhase1) +
+            _waveAmplitude2 * Mathf.Sin(2 * Mathf.PI * (_waveFrequency2 * Time.time + position.z / (2 * _waveLength2)) + _wavePhase2);
+
+        return waveHeight;
     }
 }

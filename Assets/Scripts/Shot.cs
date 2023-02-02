@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
-    [SerializeField] WaterBodyPhysics _waterBodyPhysics;
     [SerializeField] float _gravityMultiplier = 1f;
     [SerializeField] float _lifeTime = 10f;
     [SerializeField] GameObject _explosionPrefab = default;
@@ -25,7 +24,7 @@ public class Shot : MonoBehaviour
         if (Time.time - _startTime > _lifeTime)
             Explode();
 
-        if (_waterBodyPhysics.IsOnWater)
+        if ( this.transform.position.y - WaveManager.Instance.GetWaterHeightAtPoint(this.transform.position) < 0f )
             Explode();
     }
 
@@ -43,5 +42,10 @@ public class Shot : MonoBehaviour
     public void Setup(Vector3 startVelocity)
     {
         _rb.velocity = startVelocity;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Explode();
     }
 }

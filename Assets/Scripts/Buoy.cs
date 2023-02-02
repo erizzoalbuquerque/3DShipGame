@@ -9,19 +9,9 @@ public class Buoy : MonoBehaviour
     [SerializeField] float _buoyancy = 10f;
     [SerializeField] List<BuoyPart> buoyParts;
 
-    float _waveAmplitude1, _waveFrequency1, _waveLength1, _wavePhase1;
-    float _waveAmplitude2, _waveFrequency2, _waveLength2, _wavePhase2;
     Rigidbody _rb;
     float _submergence;
 
-    public float WaveAmplitude1 { get => _waveAmplitude1; set => _waveAmplitude1 = value; }
-    public float WaveFrequency1 { get => _waveFrequency1; set => _waveFrequency1 = value; }
-    public float WaveLength1 { get => _waveLength1; set => _waveLength1 = value; }
-    public float WavePhase1 { get => _wavePhase1; set => _wavePhase1 = value; }
-    public float WaveAmplitude2 { get => _waveAmplitude2; set => _waveAmplitude2 = value; }
-    public float WaveFrequency2 { get => _waveFrequency2; set => _waveFrequency2 = value; }
-    public float WaveLength2 { get => _waveLength2; set => _waveLength2 = value; }
-    public float WavePhase2 { get => _wavePhase2; set => _wavePhase2 = value; }
     public float Submergence { get => _submergence; }
 
     void Awake()
@@ -49,7 +39,7 @@ public class Buoy : MonoBehaviour
         {
             Vector3 centerPosition = GetBuoyPartCenterPosition(bp);
 
-            float waterSurfaceHeight = GetWaterHeight(centerPosition);
+            float waterSurfaceHeight = WaveManager.Instance.GetWaterHeightAtPoint(centerPosition);
 
             float volumePercentage = (Mathf.Pow(bp.Radius, 3) / totalVolume);
 
@@ -71,15 +61,6 @@ public class Buoy : MonoBehaviour
     Vector3 GetBuoyPartCenterPosition(BuoyPart buoyPart)
     {
         return transform.TransformPoint(buoyPart.Offset);
-    }
-
-
-    float GetWaterHeight(Vector3 position)
-    {
-        float waveHeight = _waveAmplitude1 * Mathf.Sin(2 * Mathf.PI * (_waveFrequency1 * Time.time + position.x / (2 * _waveLength1)) + _wavePhase1) +
-            _waveAmplitude2 * Mathf.Sin(2 * Mathf.PI * (_waveFrequency2 * Time.time + position.z / (2 * _waveLength2)) + _wavePhase2); 
-        
-        return  waveHeight;
     }
 
     private void OnDrawGizmosSelected()

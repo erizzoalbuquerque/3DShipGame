@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    [SerializeField] float _radius = 5.0F;
-    [SerializeField] float _forceAtCenter = 10.0F;
+    [SerializeField] float _radius = 5.0f;
+    [SerializeField] float _forceAtCenter = 10.0f;
+    [SerializeField] float _upwardsModifier = 3f;
     [SerializeField] float _lifeTime = 5f;
 
     float _startTime;
@@ -19,12 +20,23 @@ public class Explosion : MonoBehaviour
     {
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, _radius);
+
+        List<Rigidbody> hitBodies = new List<Rigidbody>();
         foreach (Collider hit in colliders)
         {
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            Rigidbody rb = hit.attachedRigidbody;
 
             if (rb != null)
-                rb.AddExplosionForce(_forceAtCenter, explosionPos, _radius, 3.0F);
+            {
+                print(rb.gameObject.name);
+                if (!hitBodies.Contains(rb))
+                    hitBodies.Add(rb);
+            }
+        }
+
+        foreach (Rigidbody hitBody in hitBodies)
+        {
+            hitBody.AddExplosionForce(_forceAtCenter, explosionPos, _radius, _upwardsModifier);
         }
     }
 
