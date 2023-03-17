@@ -11,7 +11,7 @@ public class LimitSpeed : MonoBehaviour
 
     void Awake()
     {
-        _rb.GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame

@@ -48,8 +48,11 @@ MonoBehaviour:
   _shotPrefab: {fileID: 8419240909975221637, guid: f6fb7ddb8cee4f84586075f625fb8ecb,
     type: 3}
   _shotStartPosition: {fileID: 4337085822310504295}
-  _shotSpeed: 10
+  _addCannonVelocityToTheShot: 1
+  _shotSpeed: 15
   _rechargeTime: 0.5
+  _yawAxis: {fileID: 0}
+  _pitchAxis: {fileID: 5378679625536923234}
 --- !u!1 &4787617209967315484
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class Explosion : MonoBehaviour
 
             if (rb != null)
             {
-                print(rb.gameObject.name);
+                //print(rb.gameObject.name);
                 if (!hitBodies.Contains(rb))
                     hitBodies.Add(rb);
             }
@@ -43,7 +43,10 @@ public class Explosion : MonoBehaviour
 
         foreach (Rigidbody hitBody in hitBodies)
         {
-            hitBody.AddExplosionForce(_forceAtCenter, explosionPos, _radius, _upwardsModifier);
+            //Vector3 explosionPosModified = new Vector3(explosionPos.x, hitBody.transform.position.y , explosionPos.z);
+            //hitBody.AddExplosionForce(_forceAtCenter, explosionPosModified, _radius, _upwardsModifier);
+
+            hitBody.AddForce(CalculateExplosionForce(explosionPos, hitBody.transform.position));
         }
 
         _currentTime = 0;
@@ -72,5 +75,29 @@ public class Explosion : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, _radius);
+    }
+
+
+    Vector3 CalculateExplosionForce(Vector3 explosionPosition, Vector3 hitBodyPosition)
+    {
+        Vector3 explosionForce = Vector3.zero;
+
+        Vector3 explosionDirection = hitBodyPosition - explosionPosition;
+
+        float xNormalizedDistance = Mathf.Clamp(explosionDirection.x / _radius, -1f, 1f);
+        float yNormalizedDistance = Mathf.Clamp( Mathf.Abs(explosionDirection.y) / _radius, -1f, 1f);
+        float zNormalizedDistance = Mathf.Clamp(explosionDirection.z / _radius, -1f, 1f);
+
+        explosionForce = new Vector3(ForceByDistance(xNormalizedDistance), ForceByDistance(yNormalizedDistance), ForceByDistance(zNormalizedDistance)) * _forceAtCenter;
+
+        return explosionForce;
+    }
+
+    float ForceByDistance(float normalizedDistance)
+    {
+        if (normalizedDistance >= 0)
+            return 1f - normalizedDistance;
+        else
+            return -1f - normalizedDistance;  
     }
 }

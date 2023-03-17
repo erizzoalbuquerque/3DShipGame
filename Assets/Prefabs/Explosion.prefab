@@ -4917,12 +4917,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c1832fac73da149a3636d861577cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 7
-  _forceAtCenter: 1000
-  _upwardsModifier: 0
+  _radius: 10
+  _forceAtCenter: 300
+  _upwardsModifier: 3
   _lifeTime: 0.5
   _startSize: 0.1
-  _endingSize: 6
+  _endingSize: 8
   _radiusOvertime:
     serializedVersion: 2
     m_Curve:

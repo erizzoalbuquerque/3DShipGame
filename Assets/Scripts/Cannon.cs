@@ -10,6 +10,8 @@ public class Cannon : MonoBehaviour
     [SerializeField] float _shotSpeed = 8f;
     [SerializeField] float _rechargeTime = 1f;
     [SerializeField] Transform _yawAxis = default;
+    [SerializeField] float  _pitchSensitivity = 50f;
+    [SerializeField] Transform _pitchAxis = default;
 
     static Plane _aimPlane = new Plane(Vector3.up, 0f);
 
@@ -40,7 +42,7 @@ public class Cannon : MonoBehaviour
 
         Vector3 shotVelocity = _shotStartPosition.transform.forward * _shotSpeed;
         if (_addCannonVelocityToTheShot)
-            shotVelocity += canoonBaseVelocity * Vector3.Dot(canoonBaseVelocity.normalized, _shotStartPosition.transform.forward);
+            shotVelocity += canoonBaseVelocity;
 
         shot.GetComponent<Shot>().Setup(shotVelocity);
         _timeLastShot = Time.time;
@@ -64,11 +66,19 @@ public class Cannon : MonoBehaviour
 
         float xzAngle = Vector3.SignedAngle(forward, deltaXZ, Vector3.up);
         SetYaw(xzAngle);
+
+        float cannonPitch =  45f * (1 - Mathf.Exp(-deltaXZ.magnitude / _pitchSensitivity));
+        SetPitch(-cannonPitch);
     }
 
     void SetYaw(float angle)
     {
         _yawAxis.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
+    }
+
+    void SetPitch(float angle)
+    {
+        _pitchAxis.localRotation = Quaternion.Euler(new Vector3(angle, 0f, 0f));
     }
 
     // private void OnDrawGizmos()
