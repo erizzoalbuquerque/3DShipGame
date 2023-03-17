@@ -58,7 +58,7 @@ public class ShipController : MonoBehaviour
         float maxSpeedChange = _maxForwardAcceleration * Time.deltaTime;
         
         float incrementalForwardSpeed;
-        if (Mathf.Abs(currentForwardSpeed) < _maxForwardSpeed)
+        if (Mathf.Abs(currentForwardSpeed) < _maxForwardSpeed && _waterBody.IsOnWater)
             incrementalForwardSpeed = maxSpeedChange * _forwardInput;
         else
             incrementalForwardSpeed = 0;

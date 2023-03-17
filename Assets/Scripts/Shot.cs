@@ -44,7 +44,7 @@ public class Shot : MonoBehaviour
         _rb.velocity = startVelocity;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         Explode();
     }

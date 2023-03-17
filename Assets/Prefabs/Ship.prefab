@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 199976259077137197}
   - component: {fileID: 208841015}
   - component: {fileID: 208841016}
+  - component: {fileID: 696263018624448929}
+  - component: {fileID: 2635267646343836231}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -89,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b582053bb8b0f314c99d828e03772ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _centerOfMassLocalPosition: {x: 0, y: -0.28, z: 0}
+  _centerOfMassLocalPosition: {x: 0, y: -1.5, z: 0}
 --- !u!114 &199976259077137197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +142,35 @@ MonoBehaviour:
   _maxSteeringSpeed: 2
   _maxSteeringAcceleration: 4
   _jumpVelocity: 10
+--- !u!114 &696263018624448929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199976259077137184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a13248d972ac540be8332b8a727c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _splashPrefab: {fileID: 6793382587377997995, guid: dec1298979f34b94e8274e1e8376fb3c,
+    type: 3}
+  _minIntervalOutOfWaterToSplash: 0.5
+--- !u!114 &2635267646343836231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199976259077137184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9d39347728bef45a6aa1baea8d21f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _limitSpeed: 15
+  _limitAngularSpeed: 5
 --- !u!1001 &199976259805597734
 PrefabInstance:
   m_ObjectHideFlags: 0

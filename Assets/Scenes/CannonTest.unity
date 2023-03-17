@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -615,6 +616,23 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0.911
+  sharedProfile: {fileID: 11400000, guid: 144fbc96f468d67449bc7eb8968ac063, type: 2}
 --- !u!1001 &350451808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1824,7 +1842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484aa52ffaedd49499278c6d49d1236b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _noWaves: 1
+  _noWaves: 0
   _waterMaterial: {fileID: 2100000, guid: 148bd0b46397fac4e9308d4241c3ab55, type: 2}
   _waveAmplitude1: 2
   _waveFrequency1: 0.1
@@ -3166,10 +3184,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 199976259077137196, guid: 3429583b60d550341bed965acefbbfc5,
+        type: 3}
+      propertyPath: _centerOfMassLocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1236946996773129204, guid: 3429583b60d550341bed965acefbbfc5,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635267646343836231, guid: 3429583b60d550341bed965acefbbfc5,
+        type: 3}
+      propertyPath: _limitAngularSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4603222000148346997, guid: 3429583b60d550341bed965acefbbfc5,
         type: 3}

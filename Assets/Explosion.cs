@@ -9,11 +9,18 @@ public class Explosion : MonoBehaviour
     [SerializeField] float _upwardsModifier = 3f;
     [SerializeField] float _lifeTime = 5f;
 
+    [SerializeField] float _startSize = 0f;
+    [SerializeField] float _endingSize = 5f;
+    [SerializeField] AnimationCurve _radiusOvertime;
+
     float _startTime;
+    float _currentTime;
+    Material _material;
 
     private void Awake()
     {
         _startTime = Time.time;
+        _material = this.GetComponent<MeshRenderer>().material;
     }
 
     void Start()
@@ -38,12 +45,27 @@ public class Explosion : MonoBehaviour
         {
             hitBody.AddExplosionForce(_forceAtCenter, explosionPos, _radius, _upwardsModifier);
         }
+
+        _currentTime = 0;
+        UpdateVisuals();
     }
 
     private void Update()
     {
+        _currentTime = Time.time - _startTime;
+        
         if (Time.time - _startTime > _lifeTime)
-            Destroy(this);
+            Destroy(this.gameObject);
+
+        UpdateVisuals();
+    }
+
+    void UpdateVisuals()
+    {
+        float timeSinceStaredScaled = _currentTime / _lifeTime;
+
+        transform.localScale = Mathf.Lerp(_startSize,_endingSize, _radiusOvertime.Evaluate(timeSinceStaredScaled))*Vector3.one*2f;
+        _material.SetFloat("_Dissolve", timeSinceStaredScaled);
     }
 
     private void OnDrawGizmos()
