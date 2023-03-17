@@ -49,9 +49,10 @@ MonoBehaviour:
     type: 3}
   _shotStartPosition: {fileID: 4337085822310504295}
   _addCannonVelocityToTheShot: 1
-  _shotSpeed: 15
+  _shotSpeed: 18
   _rechargeTime: 0.5
   _yawAxis: {fileID: 0}
+  _pitchSensitivity: 50
   _pitchAxis: {fileID: 5378679625536923234}
 --- !u!1 &4787617209967315484
 GameObject:

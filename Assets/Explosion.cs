@@ -12,6 +12,7 @@ public class Explosion : MonoBehaviour
     [SerializeField] float _startSize = 0f;
     [SerializeField] float _endingSize = 5f;
     [SerializeField] AnimationCurve _radiusOvertime;
+    [SerializeField] AnimationCurve _forceOverDistance;
 
     float _startTime;
     float _currentTime;
@@ -96,8 +97,8 @@ public class Explosion : MonoBehaviour
     float ForceByDistance(float normalizedDistance)
     {
         if (normalizedDistance >= 0)
-            return 1f - normalizedDistance;
+            return _forceOverDistance.Evaluate(normalizedDistance);
         else
-            return -1f - normalizedDistance;  
+            return - _forceOverDistance.Evaluate(-normalizedDistance);  
     }
 }
