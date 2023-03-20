@@ -1,5 +1,6 @@
 # Water Physics, Ships and Rubber Ducks
 Not a game. Just a bunch of things I was curious about. Water Physics, Ships and Rubber Ducks.
+Download the latest build [**on the game's itch.io page**](https://eduardo-rizzo.itch.io/the-sea-is-mysterious-not-a-game)
 
 [![Cover](/Docs/Images/Cover.png)](https://youtu.be/lDWIVKHgtn4 "The Sea is Mysterious")
 
