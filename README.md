@@ -1,5 +1,5 @@
 # Water Physics, Ships and Rubber Ducks
-Nota a game. Just a bunch of things I was curious about. Water Physics, Ships and Rubber Ducks.
+Not a game. Just a bunch of things I was curious about. Water Physics, Ships and Rubber Ducks.
 
 [![Cover](/Docs/Images/Cover.png)](https://youtu.be/lDWIVKHgtn4 "The Sea is Mysterious")
 
