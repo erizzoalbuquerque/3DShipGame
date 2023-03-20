@@ -8,6 +8,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] Transform _shotStartPosition;
     [SerializeField] bool _addCannonVelocityToTheShot = false;
     [SerializeField] float _shotSpeed = 8f;
+    [SerializeField] AnimationCurve _shotSpeedModifierCurve;
     [SerializeField] float _rechargeTime = 1f;
     [SerializeField] Transform _yawAxis = default;
     [SerializeField] float  _pitchSensitivity = 50f;
@@ -17,6 +18,7 @@ public class Cannon : MonoBehaviour
 
     float _timeLastShot;
     Vector3 _aimPosition;
+    float _cannonPitchNormalized;
 
 
     // Start is called before the first frame update
@@ -40,7 +42,9 @@ public class Cannon : MonoBehaviour
         //Shot
         GameObject shot = Instantiate(_shotPrefab, _shotStartPosition.transform.position, Quaternion.identity);
 
-        Vector3 shotVelocity = _shotStartPosition.transform.forward * _shotSpeed;
+        float shotSpeedModifier = _shotSpeedModifierCurve.Evaluate(_cannonPitchNormalized);
+
+        Vector3 shotVelocity = _shotStartPosition.transform.forward * _shotSpeed * shotSpeedModifier;
         if (_addCannonVelocityToTheShot)
             shotVelocity += canoonBaseVelocity;
 
@@ -68,7 +72,7 @@ public class Cannon : MonoBehaviour
         SetYaw(xzAngle);
 
         float cannonPitch =  45f * (1 - Mathf.Exp(-deltaXZ.magnitude / _pitchSensitivity));
-        SetPitch(-cannonPitch);
+        SetPitch(cannonPitch);
     }
 
     void SetYaw(float angle)
@@ -78,7 +82,8 @@ public class Cannon : MonoBehaviour
 
     void SetPitch(float angle)
     {
-        _pitchAxis.localRotation = Quaternion.Euler(new Vector3(angle, 0f, 0f));
+        _pitchAxis.localRotation = Quaternion.Euler(new Vector3(-angle, 0f, 0f));
+        _cannonPitchNormalized = angle / 45f;
     }
 
     // private void OnDrawGizmos()
